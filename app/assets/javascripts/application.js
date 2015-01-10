@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+
 //= require lib/underscore
 //= require lib/backbone
 //= require lib/marionette

@@ -1,13 +1,9 @@
-do (Marionette) ->
-	_.extend Marionette.Renderer,
+# JST looks by default into javascript directory
 
-		root: "backbone/apps"
+Backbone.Marionette.Renderer.render = (template, data) ->
+	path = JST['backbone/apps/' + template]
 
-		render: (template, data) ->
-			path = @getTemplate(template)
-			throw "Template #{template} not found!" unless path
-			path(data)
+	unless path
+		throw "Template #{template} not found!"
 
-		getTemplate: (template) ->
-			for path in [template, template.split("/").insertAt(-1, "templates").join("/")]
-				return JST[@root + path] if JST[@root + path]
+	path(data)

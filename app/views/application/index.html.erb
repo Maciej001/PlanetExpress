@@ -3,4 +3,11 @@
 	<div id="main-region"></div>
 	<div id="push"></div>
 </div>
+
 <div id="footer-region"></div>
+
+<%= javascript_tag do %>
+	$(function(){
+		PlanetExpress.start();
+	});
+<% end %>

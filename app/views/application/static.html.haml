@@ -1,31 +1,5 @@
 %div#wrap
 	%div#header-region
-		%header
-			%div.contain-to-grid
-				%nav.top-bar
-					%ul.title-area
-						%li.name
-							%h1
-								%a{href: "#"}
-									%span#logo
-										=image_tag "ship.png" 
-									Planet Express
-
-					%section.top-bar-section
-						%ul.right
-							%li.divider
-							%li
-								%a{href: "#"}
-									%i.general.fi-graph-trend
-									Dashboard
-							%li.divider
-							%li.active
-								%a{href: "#"}
-									%i.social.fi-torso
-									Crew
-							%li.divider
-
-	/ end of header-region
 
 	%div#main-region
 		%div#crew-list
@@ -85,7 +59,7 @@
 										%li
 											%button.btn.small.radius{:data => {:formbutton => "primary"}} Save
 										%li
-											%button.btn.small.secondary.radius{:data => {:formbutton => "cancel"}} Save
+											%button.btn.small.secondary.radius{:data => {:formbutton => "cancel"}} Cancel
 
 			%div.row
 				%div.large-12.columns.text-center
