@@ -18,5 +18,22 @@
 	class List.New extends App.Views.ItemView
 		template: "crew/list/templates/_new"
 
-	class List.Crew extends App.Views.ItemView
-		template: "crew/list/templates/_crew"
+	class List.CrewMember extends App.Views.ItemView
+		template: 	"crew/list/templates/_crew_member"
+		tagName: 		"li"
+		className: 	"crew-member"
+
+	class List.Empty extends App.Views.ItemView
+		template: 	"crew/list/templates/_empty"
+		tagName:		"li"
+		className: 	"crew-member"
+
+	class List.Crew extends App.Views.CompositeView
+		template: 						"crew/list/templates/_crew"
+		childView: 						List.CrewMember
+		emptyView:						List.Empty
+		childViewContainer: 	"ul"
+
+
+
+

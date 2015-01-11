@@ -3,13 +3,14 @@
 	List.Controller = 
 		
 		list: ->
+			crew = App.request "crew:entities"
 			@layoutView = @getLayoutView()
 
 			@layoutView.on "show", =>
 				@titleRegion()
 				@panelRegion()
 				@newRegion()
-				@crewRegion()
+				@crewRegion crew
 
 			App.mainRegion.show @layoutView
 
@@ -25,8 +26,8 @@
 			newView = @getNewView()
 			@layoutView.newRegion.show newView
 
-		crewRegion: ->
-			crewView = @getCrewView()
+		crewRegion: (crew) ->
+			crewView = @getCrewView crew
 			@layoutView.crewRegion.show crewView
 
 		getPanelView: ->
@@ -41,5 +42,6 @@
 		getNewView: ->
 			new List.New
 
-		getCrewView: ->
-			new List.Crew
+		getCrewView: (crew) ->
+			new List.Crew 
+				collection: crew
