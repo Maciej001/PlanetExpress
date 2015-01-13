@@ -11,7 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-
+//= require jquery_ujs
+//= require foundation
 //= require lib/underscore
 //= require lib/backbone
 //= require lib/marionette
@@ -24,4 +25,4 @@
 //= require_tree ./backbone/apps
 
 
-$(function(){ $(document).foundation(); });
+$(function(){ 'use strict'; $(document).foundation(); });

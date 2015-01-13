@@ -4,15 +4,19 @@
 		
 		list: ->
 			crew = App.request "crew:entities"
-			@layoutView = @getLayoutView()
 
-			@layoutView.on "show", =>
-				@titleRegion()
-				@panelRegion()
-				@newRegion()
-				@crewRegion crew
+			# 'when:fetched' was originally implemented in edit controller
+			# Episode 6 part 1, min ok 55:00
+			App.execute "when:fetched", crew, =>
+				@layoutView = @getLayoutView()
 
-			App.mainRegion.show @layoutView
+				@layoutView.on "show", =>
+					@titleRegion()
+					@panelRegion()
+					# @newRegion() shows only after 'Add' clicked
+					@crewRegion crew
+
+				App.mainRegion.show @layoutView
 
 		titleRegion: ->
 			titleView = @getTitleView()
@@ -20,14 +24,27 @@
 
 		panelRegion: ->
 			panelView = @getPanelView()
+
+			panelView.on "new:crew:button:clicked", =>
+				@newRegion()
+
 			@layoutView.panelRegion.show panelView
 
 		newRegion: ->
-			newView = @getNewView()
-			@layoutView.newRegion.show newView
+			region = @layoutView.newRegion
+			newView = App.request "new:crew:member:view"
+
+			newView.on "form:cancel:button:clicked", =>
+				region.reset()
+
+			region.show newView
 
 		crewRegion: (crew) ->
 			crewView = @getCrewView crew
+
+			crewView.on "childview:crew:member:clicked", (child, member) ->
+				App.vent.trigger "crew:member:clicked", member
+
 			@layoutView.crewRegion.show crewView
 
 		getPanelView: ->
@@ -39,9 +56,8 @@
 		getLayoutView: ->
 			new List.LayoutView
 
-		getNewView: ->
-			new List.New
-
 		getCrewView: (crew) ->
 			new List.Crew 
 				collection: crew
+
+

@@ -15,13 +15,16 @@
 	class List.Panel extends App.Views.ItemView
 		template: "crew/list/templates/_panel"
 
-	class List.New extends App.Views.ItemView
-		template: "crew/list/templates/_new"
+		triggers: 
+			"click #new-crew": "new:crew:button:clicked"
 
 	class List.CrewMember extends App.Views.ItemView
 		template: 	"crew/list/templates/_crew_member"
 		tagName: 		"li"
 		className: 	"crew-member"
+
+		events: 
+			"click": -> @trigger "crew:member:clicked", @model
 
 	class List.Empty extends App.Views.ItemView
 		template: 	"crew/list/templates/_empty"
