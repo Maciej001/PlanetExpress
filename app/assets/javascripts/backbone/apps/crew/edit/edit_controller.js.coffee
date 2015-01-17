@@ -41,7 +41,7 @@
 			# create View
 			editView = @getEditView crew
 
-			# wrap it in a form 
+			# wrap editView in a form 
 			# implemented in components/form/form_controller
 			formView = App.request "form:wrapper", editView
 

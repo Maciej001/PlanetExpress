@@ -17,3 +17,15 @@
 	class Edit.Crew extends App.Views.ItemView
 		template: "crew/edit/edit_crew"
 
+		# here you can pass config options to form wrapper
+		# footer - if you need it 'true' or 'false'
+		# focusFirstInput - focus on first input field
+		# buttons
+		form:
+			buttons: 
+				primary: "foo"
+				cancel: "bar cancel"
+				placement: "left"
+
+
+
