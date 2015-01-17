@@ -1,7 +1,7 @@
 @PlanetExpress.module "CrewApp.List", (List, App, Backbone, Marionette, $, _) ->
 	
 	class List.LayoutView extends App.Views.LayoutView
-		template: "crew/list/templates/list_layout"
+		template: "crew/list/list_layout"
 
 		regions: 
 			titleRegion: 	"#title-region"
@@ -10,16 +10,16 @@
 			crewRegion: 	"#crew-region"
 
 	class List.Title extends App.Views.ItemView
-		template: "crew/list/templates/_title" 
+		template: "crew/list/_title" 
 
 	class List.Panel extends App.Views.ItemView
-		template: "crew/list/templates/_panel"
+		template: "crew/list/_panel"
 
 		triggers: 
 			"click #new-crew": "new:crew:button:clicked"
 
 	class List.CrewMember extends App.Views.ItemView
-		template: 	"crew/list/templates/_crew_member"
+		template: 	"crew/list/_crew_member"
 		tagName: 		"li"
 		className: 	"crew-member"
 
@@ -27,12 +27,12 @@
 			"click": -> @trigger "crew:member:clicked", @model
 
 	class List.Empty extends App.Views.ItemView
-		template: 	"crew/list/templates/_empty"
+		template: 	"crew/list/_empty"
 		tagName:		"li"
 		className: 	"crew-member"
 
 	class List.Crew extends App.Views.CompositeView
-		template: 						"crew/list/templates/_crew"
+		template: 						"crew/list/_crew"
 		childView: 						List.CrewMember
 		emptyView:						List.Empty
 		childViewContainer: 	"ul"

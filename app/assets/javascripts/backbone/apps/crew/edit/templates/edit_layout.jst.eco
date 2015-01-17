@@ -1,0 +1,44 @@
+<div id="edit-crew-layout">
+  <div id="title-region">
+  	<div id="page-title">
+		  <div class="row">
+		    <div class="large-12 columns">
+		      <h1><%= @name %></h1>
+		      <h4>Some awesome quote here
+		      </h4>
+		      <div id="page-icons">
+		        <i class="fi-male"></i>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="inappnav">
+		  <div class="row">
+		    <div class="columns large-12">
+		      <ul class="right breadcrumbs">
+		        <li>
+		          <a href="#">Home</a>
+		        </li>
+		        <li>
+		          <a href="#crew">Crew</a>
+		        </li>
+		        <li class="current">
+		          <a href="#"><%= @name %></a>
+		        </li>
+		      </ul>
+		    </div>
+		  </div>
+		</div> <!-- breadcrumbs -->
+
+  </div><!--  title region -->
+
+  <section>
+    <div class="row">
+      <div class="large-12 columns">
+        <h3>Edit</h3>
+         <div id="form-region"></div>
+      </div>
+    </div>
+  </section>
+</div>
