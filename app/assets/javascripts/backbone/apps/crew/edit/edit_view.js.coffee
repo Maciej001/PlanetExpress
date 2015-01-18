@@ -17,15 +17,32 @@
 	class Edit.Crew extends App.Views.ItemView
 		template: "crew/edit/edit_crew"
 
-		# here you can pass config options to form wrapper
-		# footer - if you need it 'true' or 'false'
-		# focusFirstInput - focus on first input field
-		# buttons
+		# form: 
+		# 	footer: true/false
+		# 	focusFirstInput: true/false
+		# 	buttons:  omitted=true/false
+		# 		primary: "Save"
+		# 		cancel: "Cancel"
+		# 		placement: "right"
+		#
+		# if buttons.cancel = false - 'cancel' button will be omitted
+		# if buttons.primary = false - 'primary' button will be omitted
+		# if buttons are to be omitted at all
+		# use buttons: false
 		form:
+			footer: true
 			buttons: 
-				primary: "foo"
-				cancel: "bar cancel"
-				placement: "left"
+				primary: "Save"
+				cancel: "Olej"
+				placement: "right"
+
+		# triggered from form_controller to validate data
+		# triggerMethod("form:submit", data) on the view
+		# 'on' is added and first letters capitalized
+		onFormSubmit: (data) ->
+			console.log "Edit.Crew onFormSubmit", data
+			false
+
 
 
 
