@@ -19,6 +19,8 @@
 			@listenTo @formLayout, "form:submit", @formSubmit 
 
 		formSubmit: ->
+			# backbone.syphone takes the formLayout and returns
+			# JSON object with all data serialized
 			data = Backbone.Syphon.serialize @formLayout
 
 			# first check data and than save it
@@ -26,14 +28,16 @@
 			# if it's ok to update the model
 			if @contentView.triggerMethod("form:submit", data) isnt false  
 				model = @contentView.model
-				@processFormSubmit data, model
+				collection = @contentView.collection
+				@processFormSubmit data, model, collection
 
-		processFormSubmit: (data, model) ->
+		processFormSubmit: (data, model, collection) ->
 			# before the model attributes are updated we want to wait 
 			# for the server to validate data, and update only
 			# if we don't get any errors
 			# Let's implement it in our entities/_base/models.js.coffee
-			model.save data 
+			model.save data,  
+				collection: collection # updated save method of model
 
 		formContentRegion: ->
 			@formLayout.formContentRegion.show @contentView
@@ -76,6 +80,7 @@
 			_.defaults config,
 				footer: true
 				focusFirstInput: true
+				errors: true    # on/off switch for errors parsing in form_view
 
 		getButtons: (buttons = {}) ->
 			App.request("form:button:entities", buttons, @contentView.model) unless buttons is false

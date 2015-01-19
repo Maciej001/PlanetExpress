@@ -20,6 +20,10 @@
 		triggers: 
 			"submit"	: 	"form:submit" # implemented in form_controller
 
+		modelEvents:
+			# _errors is set on model, in entities/_base/models
+			"change:_errors": "changeErrors"
+
 		initialize: ->
 			# originaly to access options we had to write @options.config
 			# @options.buttons
@@ -66,6 +70,21 @@
 			@model.isNew() ? "new" : "edit"
 
 
+		changeErrors: (model, errors, options) ->
+		# whenever we bind to change event the callback receives 
+		# model, changed value that triggered change, so in our case 
+		# 'errors', and any options passed to the set method.
+		# @config.errors can be on/off in form_controller
+			if @config.errors
+				@addErrors errors
 
+		addErrors: (errors = {}) ->
+			for name, array of errors
+				@addError name, array[0]  # add just first message
+
+		addError: (name, error) ->
+			el = @$("[name='#{name}']")
+			sm = $("<small>").text(error)
+			el.after(sm).closest(".row").addClass("error")
 
 

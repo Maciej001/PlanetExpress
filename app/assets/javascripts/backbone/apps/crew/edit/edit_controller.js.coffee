@@ -17,8 +17,6 @@
 			# entities/crew.js.coffee 
 			crew or= App.request "crew:entity", id
 
-			crew.on "all", (e) -> console.log "event: ", e
-
 			# Commands are used by one component to tell other component
 			# to perfom an action without direct reference to it.
 			# Callback of a command is not expected to return value
@@ -29,9 +27,14 @@
 				@layoutView = @getLayoutView crew 
 
 				@layoutView.on "show", =>
+					@titleRegion crew
 					@formRegion crew
 
 				App.mainRegion.show @layoutView
+
+		titleRegion: (crew) ->
+			titleView = @getTitleView crew
+			@layoutView.titleRegion.show titleView
 
 		formRegion: (crew) ->
 			# a bit strange construction for now
@@ -55,6 +58,10 @@
 
 			# display it within layout
 			@layoutView.formRegion.show formView
+
+		getTitleView: (crew) ->
+			new Edit.Title
+				model: crew
 
 		getLayoutView: (crew) ->
 			new Edit.LayoutView

@@ -4,7 +4,8 @@
 		template: "crew/edit/edit_layout"
 
 		regions: 
-			formRegion: "#form-region"
+			titleRegion: 	"#title-region"
+			formRegion: 	"#form-region"
 
 		# We don't need below code anymore, because we implemented
 		# 'when:fetched' method
@@ -13,6 +14,14 @@
 		# # crew member data. 'sync' is the last event that fires after 
 		# # fetching modelEvents: 
 		# #	"sync": "render" 
+
+	class Edit.Title extends App.Views.ItemView
+		template: "crew/edit/edit_title"
+
+		# 'updated' or 'created' events are fired by Model
+		# check: entities/_base/models.js.coffee
+		modelEvents:
+			"updated": "render"
 
 	class Edit.Crew extends App.Views.ItemView
 		template: "crew/edit/edit_crew"
@@ -41,7 +50,7 @@
 		# 'on' is added and first letters capitalized
 		onFormSubmit: (data) ->
 			console.log "Edit.Crew onFormSubmit", data
-			false
+			true
 
 
 
