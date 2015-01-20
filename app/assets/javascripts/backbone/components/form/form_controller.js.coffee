@@ -17,6 +17,11 @@
 			# closes down
 			@listenTo @formLayout, "show", @formContentRegion
 			@listenTo @formLayout, "form:submit", @formSubmit 
+			@listenTo @formLayout, "form:cancel", @formCancel
+
+		formCancel: ->
+			# forward event to edit_controller
+			@contentView.triggerMethod "form:cancel"
 
 		formSubmit: ->
 			# backbone.syphone takes the formLayout and returns
@@ -58,7 +63,6 @@
 			# This is so footer:true, can be passed when creating 
 			# form wrapper in edit_controller
 			_.extend config, options
-
 			buttons = @getButtons config.buttons
 
 			new Form.FormWrapper
@@ -76,7 +80,7 @@
 			# _.defaults(object, *defaults) - fills in undefined properties
 			# in object with the first value in the following list 
 			# of defaults objects
-			# If form foter is undefined than it's set to 'true'
+			# If form footer is undefined than it's set to 'true'
 			_.defaults config,
 				footer: true
 				focusFirstInput: true

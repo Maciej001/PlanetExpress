@@ -42,14 +42,13 @@
 			footer: true
 			buttons: 
 				primary: "Save"
-				cancel: "Olej"
+				cancel: "Cancel"
 				placement: "right"
 
 		# triggered from form_controller to validate data
 		# triggerMethod("form:submit", data) on the view
 		# 'on' is added and first letters capitalized
 		onFormSubmit: (data) ->
-			console.log "Edit.Crew onFormSubmit", data
 			true
 
 

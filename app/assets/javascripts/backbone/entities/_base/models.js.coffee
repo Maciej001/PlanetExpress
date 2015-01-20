@@ -22,6 +22,9 @@
 				success: 	_.bind(@saveSuccess, @, isNew, options.collection)
 				error:		_.bind(@saveError, @)
 
+			# remove _errors attribute set below in saveError function
+			@unset "_errors"
+
 			super data, options
 
 
@@ -59,7 +62,7 @@
 
 			# don'f forget to unset before next submit of the form. On submit all 
 			# error messages should disapear from the form. 
-			
+
 
 			
 

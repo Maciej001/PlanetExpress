@@ -17,11 +17,14 @@
 			buttonContainer: "ul.inline-list"
 
 		# triggers are stopped with preventDefault and stopPropagation methods
+		# triggers are listened from form_controller
 		triggers: 
 			"submit"	: 	"form:submit" # implemented in form_controller
+			"click [data-form-button='cancel']":  "form:cancel "
 
 		modelEvents:
 			# _errors is set on model, in entities/_base/models
+			# gets triggered by both @set _errors and @unset "_errors"
 			"change:_errors": "changeErrors"
 
 		initialize: ->
@@ -36,7 +39,7 @@
 		# Item views serialize a model or collection by default calling toJSON
 		# Here we additionally serialize footer, so @footer is available
 		# in template
-		# Layout recieves opitions that were passed when calling
+		# Layout recieves options that were passed when calling
 		# new Form.FormWrapper
 		#   config: config <- options
 		serializeData: ->
@@ -69,14 +72,18 @@
 			# if model doesn't have id it's considered to be 'new'
 			@model.isNew() ? "new" : "edit"
 
-
 		changeErrors: (model, errors, options) ->
 		# whenever we bind to change event the callback receives 
 		# model, changed value that triggered change, so in our case 
 		# 'errors', and any options passed to the set method.
-		# @config.errors can be on/off in form_controller
+		# @config.errors can be on/off in form_controller 
 			if @config.errors
-				@addErrors errors
+				if _.isEmpty(errors) then @removeErrors() else @addErrors errors
+
+		removeErrors: ->
+			# remove class error from all elements that have .error class
+			# and small elements that contain error message
+			@$(".error").removeClass("error").find("small").remove()
 
 		addErrors: (errors = {}) ->
 			for name, array of errors

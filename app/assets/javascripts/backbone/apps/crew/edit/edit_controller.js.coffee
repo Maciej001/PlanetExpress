@@ -17,6 +17,10 @@
 			# entities/crew.js.coffee 
 			crew or= App.request "crew:entity", id
 
+			# Whe model get's updated/saved we can catch the event here
+			crew.on "updated", ->
+				App.vent.trigger "crew:updated", crew
+
 			# Commands are used by one component to tell other component
 			# to perfom an action without direct reference to it.
 			# Callback of a command is not expected to return value
@@ -47,11 +51,15 @@
 			# create View
 			editView = @getEditView crew
 
+			editView.on "form:cancel", ->
+				# vent is used to add event to Event Aggregator
+				App.vent.trigger "crew:cancelled", crew
+
 			# wrap editView in a form 
 			# implemented in components/form/form_controller
 			# "form:wrapper"  takes 2 arguments:
 			# view and options object, so we can pass footer: true and
-			# arguments set in editView, will be overriden by 
+			# arguments set in e ditView, will be overriden by 
 			# options ie. footer: true
 			formView = App.request "form:wrapper", editView, 
 				footer: true

@@ -3,6 +3,7 @@
 	New.Controller = 
 
 		newCrew: ->
+			crew = App.request "new:crew:entity"
 			newView = @getNewView()
 			newView
 
