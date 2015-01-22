@@ -25,7 +25,12 @@
 		modelEvents:
 			# _errors is set on model, in entities/_base/models
 			# gets triggered by both @set _errors and @unset "_errors"
-			"change:_errors": "changeErrors"
+			# sync:start 
+			# sync:stop - called from extended Backbone.sync 
+			# 					- backbone/config/backbone/sync.js.coffee
+			"change:_errors"	:	"changeErrors"
+			"sync:start"			: "syncStart"
+			"sync:stop"				: "syncStop"
 
 		initialize: ->
 			# originaly to access options we had to write @options.config
@@ -93,5 +98,15 @@
 			el = @$("[name='#{name}']")
 			sm = $("<small>").text(error)
 			el.after(sm).closest(".row").addClass("error")
+
+		syncStart: (model) ->
+			# form looks like inactive to prevent double-submission
+			console.log "added opacity"
+			@addOpacityWrapper() in @config.syncing
+			
+
+		syncStop: (model) ->
+			@removeOpacityWrapper() if @config.syncing
+			console.log "removed opacity"
 
 

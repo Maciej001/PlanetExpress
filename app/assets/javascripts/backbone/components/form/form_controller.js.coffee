@@ -85,6 +85,8 @@
 				footer: true
 				focusFirstInput: true
 				errors: true    # on/off switch for errors parsing in form_view
+				syncing: true 	# if syncStart and syncStop should be serviced
+												# form_view.js.coffee
 
 		getButtons: (buttons = {}) ->
 			App.request("form:button:entities", buttons, @contentView.model) unless buttons is false

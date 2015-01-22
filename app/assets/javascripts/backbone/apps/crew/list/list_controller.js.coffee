@@ -34,7 +34,8 @@
 			region = @layoutView.newRegion
 			newView = App.request "new:crew:member:view"
 
-			newView.on "form:cancel:button:clicked", =>
+			# "form:cancel" is called from formWrapper
+			newView.on "form:cancel", =>
 				region.reset()
 
 			region.show newView

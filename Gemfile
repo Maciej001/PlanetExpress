@@ -16,7 +16,7 @@ gem 'sass-rails', '~> 5.0.0.beta1'
 gem 'susy'
 gem 'compass-rails', '~> 2.0.0'
 gem 'font-awesome-rails' 
-gem 'zurb-foundation'
+gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 
 gem 'uglifier', '>= 1.3.0'
