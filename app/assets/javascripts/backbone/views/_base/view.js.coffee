@@ -4,6 +4,9 @@
 
 	_.extend Marionette.View::,
 
+		addOpacityWrapper: (init = true) ->
+			
+
 		setInstancePropertiesFor: (args...) ->
 			# _.pick returns a copy of the object filtered to only have
 			# values for the whitelisted args...

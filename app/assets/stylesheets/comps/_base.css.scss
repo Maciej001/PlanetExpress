@@ -16,4 +16,4 @@ ul, ol, dl								{  list-style-type: none;  }
 }
 [data-wrapper].form-opacity		{  @include opacity(0.4);  }
 
-.form-opacity { @include opacity(0.4); }
+.form-opacity { @include opacity(0.4); } 
