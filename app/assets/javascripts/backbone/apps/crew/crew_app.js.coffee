@@ -19,13 +19,18 @@
 			# we need to return not controller but view
 			# controller initializer doesn't return anything so in 
 			# New.Controller we had to create @formView which can be used here
+			# Marionette controllers accept only one argument
 			new CrewApp.New.Controller
 				region: region
 
 		edit: (id, member) ->
-			CrewApp.Edit.Controller.edit id, member
+			# passing an object containing to values, as controllers accept
+			# only one argument
+			new CrewApp.Edit.Controller
+				id: id
+				crew: member
 
-	App.reqres.setHandler "new:crew:member", (region) ->
+	App.commands.setHandler "new:crew:member", (region) ->
 		API.newCrew region
 
 	App.vent.on "crew:member:clicked crew:created", (member) ->

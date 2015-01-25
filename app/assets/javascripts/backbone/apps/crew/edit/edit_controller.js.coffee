@@ -1,40 +1,25 @@
 @PlanetExpress.module "CrewApp.Edit", (Edit, App, Backbone, Marionette, $, _) ->
 
-	Edit.Controller = 
-		edit: (id, crew) ->
-			# use either return of App.request "crew:entity" 
-			# otherwise use CRUD id. Often before editing 
-			# we will have already fetched list of crew members.
-			# we should try to avoid asking server (CRUD) to 
-			# fetch member with id = id again. 
-			# This way we avoid ajaxing/fetching again same data. 
-			#
-			# Because the 'edit' page is routeable, user can hit the page, 
-			# without going through the 'list'. 
-			# and then we have to use id and ajax request. In this case 
-			# the member/crew will be undefined.
-			# Implementation of App.request "crew:entities" is in 
-			# entities/crew.js.coffee 
+	class Edit.Controller extends App.Controllers.Base
+		initialize: (options) ->
+			{ crew, id } = options
+			# instead of 
+			# crew 	= options.crew
+			# id 		= options.id
+
 			crew or= App.request "crew:entity", id
 
-			# Whe model get's updated/saved we can catch the event here
-			crew.on "updated", ->
+			@listenTo crew, "updated", ->
 				App.vent.trigger "crew:updated", crew
 
-			# Commands are used by one component to tell other component
-			# to perfom an action without direct reference to it.
-			# Callback of a command is not expected to return value
-			# *****
-			# Create new view for editing only if 'crew' is fetched
-			# Implementation moved to entities/_base/_fetch.js.coffee
 			App.execute "when:fetched", crew, => 
 				@layoutView = @getLayoutView crew 
 
-				@layoutView.on "show", =>
+				@listenTo @layoutView, "show", =>
 					@titleRegion crew
 					@formRegion crew
 
-				App.mainRegion.show @layoutView
+				@show @layoutView
 
 		titleRegion: (crew) ->
 			titleView = @getTitleView crew
@@ -51,7 +36,7 @@
 			# create View
 			editView = @getEditView crew
 
-			editView.on "form:cancel", ->
+			@listenTo editView, "form:cancel", ->
 				# vent is used to add event to Event Aggregator
 				App.vent.trigger "crew:cancelled", crew
 

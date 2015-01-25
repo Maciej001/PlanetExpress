@@ -22,7 +22,7 @@
 				@show @layoutView
 
 		onDestroy: ->
-			console.info "closing controller!"
+			
 
 		titleRegion: ->
 			titleView = @getTitleView()
@@ -37,6 +37,10 @@
 			@layoutView.panelRegion.show panelView
 
 		newRegion: ->
+			# Change to command execution after new_controller implementation
+			# If our list_controller had to still listen to some 
+			# new view events than below solution would be better as 
+			# commands do not return anything. 
 			# region = @layoutView.newRegion
 			# newView = App.request "new:crew:member:view"
 
@@ -47,7 +51,7 @@
 			# region.show newView
 
 			App.execute "new:crew:member", @layoutView.newRegion
-
+ 
 		crewRegion: (crew) ->
 			crewView = @getCrewView crew
 

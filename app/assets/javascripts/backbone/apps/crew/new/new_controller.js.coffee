@@ -17,9 +17,9 @@
 			formView =  App.request "form:wrapper", newView
 
 			@listenTo newView, "form:cancel", =>
-				@region.destroy()
+				@region.reset()
 
-			@show formView
+			@show formView 
 
 		getNewView: (crew) ->
 			new New.Crew 

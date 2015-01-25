@@ -17,3 +17,10 @@ do (Backbone) ->
 		startHistory: ->
 			if Backbone.history
 				Backbone.history.start()
+
+		register: (instance, id) ->
+			@_registry ?= {}
+			@_registry[id] = instance
+
+		unregister: (instance, id) ->
+			delete @_registry[id]

@@ -2,7 +2,7 @@
 
 	# form controller is initialized with passed option object that gets
 	# view and config(options)
-	class Form.Controller extends Marionette.Controller
+	class Form.Controller extends App.Controllers.Base
 
 		initialize: (options = {}) ->
 			@contentView = options.view
@@ -44,8 +44,13 @@
 			model.save data,  
 				collection: collection # updated save method of model
 
+		onDestroy: ->
+			console.log "onClose", @
+
 		formContentRegion: ->
-			@formLayout.formContentRegion.show @contentView
+			# assign @region so our controlle show action works properly 
+			@region = @formLayout.formContentRegion
+			@show @contentView 
 
 		getFormLayout: (options = {}) ->
 			# _.result(object, property)
