@@ -33,17 +33,16 @@ do (Backbone) ->
 		if !entity._fetch and method is "read"
 			entity._fetch = sync
 
-
 	# beforeSend and complete trigger events serviced by FormWrapper view
+	# They add and remove ovelay container that makes form looks like 
+	# inactive.
 	methods = 
 		beforeSend: ->
 			# because _.bind was used, '@' means model within the function
 			@trigger "sync:start", @ 
-			console.log "sync started", @
 
 		complete: ->
 			@trigger "sync:stop", @ 
-			console.log "sync finished"
 
 
 

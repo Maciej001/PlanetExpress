@@ -2,6 +2,22 @@
 
 	class Entities.Model extends Backbone.Model
 
+		destroy: (options = {}) ->
+			# wait = true: waits    for the server to respond before
+			# removing the model from the collection
+			_.defaults options,
+				wait: true
+
+			# setting _destroy on the model allows us to code nice 
+			# implementation for destruction: check views/base/view.js.coffee
+			@set _destroy: true
+
+			super options
+
+		isDestroyed: -> 
+			@get "_destroy"
+
+
 		# Override default Backbone save method, setting wait: true
 		# We will wait for server before setting the new attributes
 		# on the model.
@@ -9,6 +25,7 @@
 		# When model is saved collection can be passed in options
 		# so you can then update it.
 		save: (data, options = {}) ->
+			console.log "Model is being saved with data: ", data
 			isNew = @isNew()
 
 			_.defaults options,
@@ -41,6 +58,7 @@
 				collection.trigger "model:created", @ if collection
 
 				# model is being created
+				console.log "event 'created' triggered "
 				@trigger "created", @
 			else
 				# if collection was passed use: collection

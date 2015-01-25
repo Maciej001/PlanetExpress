@@ -8,7 +8,11 @@
 					<ul class="inline-list">
 						<% for button in @buttons: %>
 							<li>
-								<button data-form-button="<%= button.type %>"
+								<!-- in form when you hit enter browser uses the first
+								found key. If the form has first key "Cancel" it will
+								use it. So here we have to inlude button.buttonType = submit
+								so it has priority -->
+								<button type="<%= button.buttonType %>" data-form-button="<%= button.type %>"
 										class="<%= button.className %>"><%= button.text%></button>
 							</li>
 						<% end %>

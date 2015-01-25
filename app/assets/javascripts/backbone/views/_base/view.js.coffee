@@ -1,11 +1,15 @@
 @PlanetExpress.module "Views", (Views, App, Backbone, Marionette, $, _) ->
 
-	_remove = Marionette.View::remove
-
+	_destroy = Marionette.View::destroy
 	_.extend Marionette.View::,
 
+		# default value is true
+		# toggleWrapper has to be available anywhere so add it to 
+		# config/jquery.js.coffee
 		addOpacityWrapper: (init = true) ->
-			
+			@$el.toggleWrapper
+				className: "form-opacity"
+			, init
 
 		setInstancePropertiesFor: (args...) ->
 			# _.pick returns a copy of the object filtered to only have
@@ -19,8 +23,24 @@
 			for key, val of _.pick(@options, args...)
 				@[key] = val
 
-		remove: (args...) ->
-			_remove.apply @, args
+		destroy: (args...) ->
+			# When destroy() method is called on crew member, we can nicely 
+			# remove the view using _destroy arg on model - entities/_base/models.js.coffee
+			
+			if @model?.isDestroyed()
+				wrapper = @$el.toggleWrapper
+					className: "opacity"
+					backgroundColor: "red"
+
+				wrapper.fadeOut 400, ->
+					$(@).remove()
+
+				# => used so this points still to CrewMember view
+				@$el.fadeOut 400, =>
+					_destroy.apply @, args
+
+			else
+				_destroy.apply @, args
 
 		templateHelpers: ->
 
@@ -32,3 +52,14 @@
 				url = "#" + url unless options.external 
 
 				"<a href='#{url}>#{@escape(name)}</a>"
+
+
+
+
+
+
+
+
+
+
+

@@ -101,12 +101,9 @@
 
 		syncStart: (model) ->
 			# form looks like inactive to prevent double-submission
-			console.log "added opacity"
 			@addOpacityWrapper() in @config.syncing
 			
-
 		syncStop: (model) ->
-			@removeOpacityWrapper() if @config.syncing
-			console.log "removed opacity"
+			@addOpacityWrapper(false) if @config.syncing
 
 

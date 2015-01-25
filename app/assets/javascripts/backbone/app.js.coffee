@@ -17,4 +17,7 @@
 		@startHistory()
 		@navigate(@rootRoute, trigger: true) unless @getCurrentRoute()
 
+	App.reqres.setHandler "default:region", ->
+		App.mainRegion
+
 	App

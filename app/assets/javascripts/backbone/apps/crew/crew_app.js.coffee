@@ -7,16 +7,26 @@
 
 	API = 
 		list: ->
-			CrewApp.List.Controller.list()
+			# before, we were using just a .list() function on the controller
+			# but now it's been changed to instantiate new controller that 
+			# will be send to garbage once we close the view. It will also 
+			# unbind all event listeners and prevent memory leaks
+			# CrewApp.List.Controller.list()
 
-		newCrew: ->
-			CrewApp.New.Controller.newCrew()
+			new CrewApp.List.Controller
+
+		newCrew: (region) ->
+			# we need to return not controller but view
+			# controller initializer doesn't return anything so in 
+			# New.Controller we had to create @formView which can be used here
+			new CrewApp.New.Controller
+				region: region
 
 		edit: (id, member) ->
 			CrewApp.Edit.Controller.edit id, member
 
-	App.reqres.setHandler "new:crew:member:view", ->
-		API.newCrew()
+	App.reqres.setHandler "new:crew:member", (region) ->
+		API.newCrew region
 
 	App.vent.on "crew:member:clicked crew:created", (member) ->
 		App.navigate Routes.edit_crew_path(member.id)
@@ -28,4 +38,4 @@
 
 	App.addInitializer ->
 		new CrewApp.Router 
-			controller: API
+			controller: API 

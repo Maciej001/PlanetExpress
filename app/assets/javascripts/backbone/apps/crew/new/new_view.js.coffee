@@ -6,5 +6,7 @@
 		# add config for your form wrapper
 		form: 
 			buttons: 
-				placement: "left"
+				placement: 	"left"
+				primary: 		"Create"
 				
+ 

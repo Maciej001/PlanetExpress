@@ -23,8 +23,15 @@
 		tagName: 		"li"
 		className: 	"crew-member"
 
-		events: 
-			"click": -> @trigger "crew:member:clicked", @model
+		# trigger handler recieves: view, model and collection of the view
+		# triggers automaticaly stopPropagation and preventDefault
+		triggers: 
+			'click .crew-delete button'	: 'crew:delete:clicked'
+			"click"											: "crew:member:clicked"
+
+		onDestroy: ->
+
+		viewDestroyed: ->  
 
 	class List.Empty extends App.Views.ItemView
 		template: 	"crew/list/_empty"

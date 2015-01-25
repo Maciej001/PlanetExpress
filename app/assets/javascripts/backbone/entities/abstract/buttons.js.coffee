@@ -1,6 +1,13 @@
 @PlanetExpress.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 	
 	class Entities.Button extends Entities.Model 
+		defaults: 
+			# all buttons will have button type, if you want one button
+			# do be able to submit form on pressing 'enter' you have to 
+			# change buttonType = 'submit', or otherwise browser would
+			# use first button on the form and 'click' it even if it were 
+			# 'cancel' button
+			buttonType: "button"
 
 	class Entities.ButtonsCollection extends Entities.Collection	
 		model: Entities.Button
@@ -18,6 +25,7 @@
 			array.push {
 				type:"primary" 
 				className: "button small radius"
+				buttonType: "submit"
 				text: buttons.primary
 			} if buttons.primary
 
