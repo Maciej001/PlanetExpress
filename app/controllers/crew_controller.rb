@@ -19,7 +19,7 @@ class CrewController < ActionController::Base
 			# respond with model, that by default will respond with validation
 			# errors in form of the JSON
 			respond_with @member
-		end	
+		end	  
 	end
 
 	def create

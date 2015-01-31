@@ -22,16 +22,35 @@
 			super
 			App.execute "unregister:instance", @, @_instance_id
 
+		onDestroy: ->
+			console.log "controller closing: ", @
+
 		show: (view, options = {}) ->
 			_.defaults options,
 				loading: 	false
 				region:		@region
 
-
-			# automatically destroy controller when view is 'destroyed'
-			@listenTo view, "destroy", @destroy 
+			@_setMainView view
 
 			@_manageView view, options
+
+		_setMainView: (view) ->
+			# the first view we show is always going to become the mainView 
+			# of our controller (whether its a layout or another view type). 
+			# So if this 'is' a layout, when we show other regions inside of 
+			# that layout, we check for the existance of a mainView first, 
+			# so our controler is only closed down when the original
+			# mainView is closed.
+
+			# _mainView is a property on our Controller, so if in the meantime
+			# you opened and closed LoadingView, still you will not close
+			# _mainView controller automatically 
+			return if @_mainView
+			
+			@_mainView = view
+
+			# destroy controller when view gets destroyed
+			@listenTo view, "destroy", @destroy 
 
 		_manageView: (view, options) ->
 			if options.loading
@@ -39,4 +58,4 @@
 			else
 				# we could use @region.show view instead
 				options.region.show view
-			
+			 

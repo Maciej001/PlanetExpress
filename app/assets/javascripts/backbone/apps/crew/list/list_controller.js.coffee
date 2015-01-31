@@ -14,8 +14,11 @@
 					@crewRegion crew
 
 				# pass view and options object
-				@show @layoutView, 
-					loading: true
+
+				@show @layoutView,  
+					loading: 
+						entities: crew
+						
 
 		titleRegion: ->
 			titleView = @getTitleView()

@@ -7,12 +7,6 @@
 
 	API = 
 		list: ->
-			# before, we were using just a .list() function on the controller
-			# but now it's been changed to instantiate new controller that 
-			# will be send to garbage once we close the view. It will also 
-			# unbind all event listeners and prevent memory leaks
-			# CrewApp.List.Controller.list()
-
 			new CrewApp.List.Controller
 
 		newCrew: (region) ->

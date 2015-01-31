@@ -5,6 +5,8 @@
 			@_registry ?= {}
 			@_registry[id] = instance
 
+			Window.r = @_registry
+
 		unregister: (instance, id) ->
 			delete @_registry[id]
 
@@ -19,8 +21,8 @@
 		getRegistrySize: ->
 			_.size @_registry	
 
-	App.commands.setHandler "register:instance", (instance, id) ->
-		API.register instance, id if App.environment is "development"
+	App.commands.setHandler "register:instance", (instance, id) =>
+		API.register instance, id if App.environment is "development" 
 
 	App.commands.setHandler "unregister:instance", (instance, id) ->
 		API.unregister instance, id if App.environment is "development"
