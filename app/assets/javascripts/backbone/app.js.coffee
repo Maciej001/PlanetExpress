@@ -2,6 +2,9 @@
 
 	App = new Marionette.Application
 
+	App.on "before:start", (options) ->
+		App.environment = options.environment
+
 	App.rootRoute = Routes.crew_index_path()
 
 	App.addRegions
@@ -19,12 +22,5 @@
 
 	App.reqres.setHandler "default:region", ->
 		App.mainRegion
-
-	App.commands.setHandler "register:instance", (instance, id) ->
-		# register is defined in config/marionette/application.js.coffee
-		App.register instance, id 
-
-	App.commands.setHandler "unregister:instance", (instance, id) ->
-		App.unregister instance, id
 
 	App

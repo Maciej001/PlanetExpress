@@ -1,6 +1,6 @@
 @PlanetExpress.module "CrewApp.New", (New, App, Backbone, Marionette, $, _) ->
 
-	class New.Controller extends App.Controllers.Base
+	class New.Controller extends App.Controllers.Application
 		initialize: ->			
 			# our base controller already knows the @region = newRegion
 			# because it has been assigned in constructor

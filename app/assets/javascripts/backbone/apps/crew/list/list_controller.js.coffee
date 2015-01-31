@@ -1,13 +1,10 @@
 @PlanetExpress.module "CrewApp.List", (List, App, Backbone, Marionette, $, _) ->
 	
-	class List.Controller extends App.Controllers.Base
+	class List.Controller extends App.Controllers.Application   
 		
 		initialize: ->
-			window.c = @
 			crew = App.request "crew:entities"
 
-			# 'when:fetched' was originally implemented in edit controller
-			# Episode 6 part 1, min ok 55:00
 			App.execute "when:fetched", crew, =>
 				@layoutView = @getLayoutView crew
 
@@ -16,13 +13,9 @@
 					@panelRegion()
 					@crewRegion crew
 
-				# App.mainRegion.show @layoutView
-
-				 # @show method has been extended in backbone/controllers/_base.js.coffee
-				@show @layoutView
-
-		onDestroy: ->
-			
+				# pass view and options object
+				@show @layoutView, 
+					loading: true
 
 		titleRegion: ->
 			titleView = @getTitleView()
@@ -35,20 +28,6 @@
 				@newRegion()
 
 			@layoutView.panelRegion.show panelView
-
-		newRegion: ->
-			# Change to command execution after new_controller implementation
-			# If our list_controller had to still listen to some 
-			# new view events than below solution would be better as 
-			# commands do not return anything. 
-			# region = @layoutView.newRegion
-			# newView = App.request "new:crew:member:view"
-
-			# # "form:cancel" is called from formWrapper
-			# @listenTo newView, "form:cancel", =>
-			# 	region.reset()
-
-			# region.show newView
 
 			App.execute "new:crew:member", @layoutView.newRegion
  

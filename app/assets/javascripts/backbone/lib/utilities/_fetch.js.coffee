@@ -1,6 +1,8 @@
-@PlanetExpress.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
+@PlanetExpress.module "Utilities", (Utilities, App, Backbone, Marionette, $, _) ->
 	
 	App.commands.setHandler "when:fetched", (entities, callback) ->
+		# calls the callback function when entities are fetched from server
+
 		xhrs = []
 
 		# chain - enables chaining of functions. It returns wrapped object

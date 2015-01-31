@@ -2,7 +2,7 @@
 
 	# form controller is initialized with passed option object that gets
 	# view and config(options)
-	class Form.Controller extends App.Controllers.Base
+	class Form.Controller extends App.Controllers.Application
 
 		initialize: (options = {}) ->
 			@contentView = options.view
