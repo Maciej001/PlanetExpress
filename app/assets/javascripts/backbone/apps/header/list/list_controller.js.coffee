@@ -3,8 +3,10 @@
 	class List.Controller extends App.Controllers.Application
 
 		initialize: (options) ->
-			listView = @getListView() 
+			navs = App.request "nav:entities"
+			listView = @getListView navs
 			@show listView
 
-		getListView: ->
+		getListView: (navs) ->
 			new List.Header	
+				collection: navs

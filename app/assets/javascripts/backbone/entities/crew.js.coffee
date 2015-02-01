@@ -35,6 +35,3 @@
 
 	App.reqres.setHandler "new:crew:entity", ->
 		API.newCrewMember()
-
-
-		

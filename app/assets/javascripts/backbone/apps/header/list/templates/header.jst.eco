@@ -14,22 +14,15 @@
 		    	</li>
 			</ul>
 			<section class="top-bar-section">
-		    	<ul class="right">
-					<li class="divider"></li>
-			      	<li>
-						<a href="#">
-							<i class="general fi-graph-trend"></i> 
-							Dashboard
-						</a>
-					</li>
-					<li class="divider"></li>
-					<li class="active">
-						<a href="#">
-							<i class="social fi-torso"></i> 
-							Crew
-						</a>
-					</li>
-					<li class="divider"></li>
+		    <ul class="right">
+					<% for item in @items: %>
+						<li>
+							<a href="<%= item.url %>">
+								<i class="<%= item.icon %>"></i> 
+								<%= item.name %>
+							</a>
+						</li>
+					<% end %>
 				</ul>
 		  	</section>
 		</nav>
