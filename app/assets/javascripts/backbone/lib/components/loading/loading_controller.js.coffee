@@ -5,14 +5,24 @@
 		initialize: (options) ->
 			{ view, config } = options
 
+			# if you passed laoding: true from @show method 
+			# config will be boolean
+			config = if _.isBoolean(config) then {} else config
+
 			_.defaults config, 
 				entities: @getEntities view
 				# if config is set to true in passed object in @show method
 				# than we freeze on loadingView with a spinner
+				# loadingType: spinner/opacity
+				loadingType: "spinner"
 				debug: false
 
-			loadingView = @getLoadingView()
-			@show loadingView
+			switch config.loadingType
+				when "opacity"
+					@region.currentView.$el.css "opacity", 0.5
+				when "spinner"
+					loadingView = @getLoadingView()
+					@show loadingView
 
 			@showRealView view, loadingView, config
 
@@ -24,7 +34,11 @@
 				# the original view so its controller is also closed. We also 
 				# prevent showing the real view (which would snap the user back 
 				# to the old view unexpectedly)
-				return realView.destroy() if @region.currentView isnt loadingView
+				switch config.loadingType
+					when "opacity"
+						@region.currentView.$el.removeAttr "style"
+					when "spinner"
+						return realView.destroy() if @region.currentView isnt loadingView
 
 				@show realView unless config.debug
 

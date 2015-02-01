@@ -13,18 +13,19 @@
 			@listenTo crew, "updated", ->
 				App.vent.trigger "crew:updated", crew
 
-			App.execute "when:fetched", crew, => 
-				@layoutView = @getLayoutView crew 
 
-				@listenTo @layoutView, "show", =>
-					@titleRegion crew
-					@formRegion crew
+			@layoutView = @getLayoutView crew 
 
-				@show @layoutView
+			@listenTo @layoutView, "show", =>
+				@titleRegion crew
+				@formRegion crew
+
+			@show @layoutView, loading: true
 
 		titleRegion: (crew) ->
 			titleView = @getTitleView crew
-			@layoutView.titleRegion.show titleView
+
+			@show titleView, region: @layoutView.titleRegion
 
 		formRegion: (crew) ->
 			# a bit strange construction for now
@@ -50,8 +51,7 @@
 			formView = App.request "form:wrapper", editView, 
 				footer: true
 
-			# display it within layout
-			@layoutView.formRegion.show formView
+			@show formView, region: @layoutView.formRegion
 
 		getTitleView: (crew) ->
 			new Edit.Title

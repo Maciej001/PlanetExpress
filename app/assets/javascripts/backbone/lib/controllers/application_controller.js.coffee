@@ -19,11 +19,9 @@
 		# arguments passed to destroy will be automatically passed 
 		# to super so we don't need to explicitly pass them
 		destroy: ->
+			console.log "closing : ", @
 			super
 			App.execute "unregister:instance", @, @_instance_id
-
-		onDestroy: ->
-			console.log "controller closing: ", @
 
 		show: (view, options = {}) ->
 			_.defaults options,

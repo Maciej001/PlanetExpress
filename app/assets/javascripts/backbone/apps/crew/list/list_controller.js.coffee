@@ -5,24 +5,18 @@
 		initialize: ->
 			crew = App.request "crew:entities"
 
-			App.execute "when:fetched", crew, =>
-				@layoutView = @getLayoutView crew
+			@layoutView = @getLayoutView()
 
-				@listenTo @layoutView, "show", =>
-					@titleRegion()
-					@panelRegion()
-					@crewRegion crew
+			@listenTo @layoutView, "show", =>
+				@titleRegion()
+				@panelRegion()
+				@crewRegion crew
 
-				# pass view and options object
-
-				@show @layoutView,  
-					loading: 
-						entities: crew
-						
+			@show @layoutView, loading: true
 
 		titleRegion: ->
 			titleView = @getTitleView()
-			@layoutView.titleRegion.show titleView
+			@show titleView, region: @layoutView.titleRegion
 
 		panelRegion: ->
 			panelView = @getPanelView()
@@ -30,8 +24,9 @@
 			@listenTo panelView, "new:crew:button:clicked", =>
 				@newRegion()
 
-			@layoutView.panelRegion.show panelView
+			@show panelView, region: @layoutView.panelRegion
 
+		newRegion: ->
 			App.execute "new:crew:member", @layoutView.newRegion
  
 		crewRegion: (crew) ->
@@ -44,10 +39,9 @@
 				model = args.model
 				if confirm "Are you sure you want to delete #{model.get("name")}?" then model.destroy() else false
 
-			@listenTo crewView, "childview:before:destroy", (args) ->
-
-			@layoutView.crewRegion.show crewView
-
+			@show crewView, 
+				loading: true
+				region: @layoutView.crewRegion
 
 		getPanelView: ->
 			new List.Panel
