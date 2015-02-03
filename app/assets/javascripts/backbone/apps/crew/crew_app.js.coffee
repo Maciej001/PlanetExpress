@@ -5,6 +5,11 @@
 			"crew/:id/edit" :	"edit"
 			"crew"					: "list"
 
+		# before and after are the router callback functions added by 
+		# vendor/assets/javascript/backbone-routefilter.js
+		before: ->
+			App.vent.trigger "nav:choose", "Crew"
+
 	API = 
 		list: ->
 			new CrewApp.List.Controller

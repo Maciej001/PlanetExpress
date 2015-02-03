@@ -1,4 +1,4 @@
-@PlanetExpress.module "Deliveries.List", (List, App, Backbone, Marionette, $, _) ->
+@PlanetExpress.module "DeliveriesApp.List", (List, App, Backbone, Marionette, $, _) ->
 	
 	class List.Controller extends App.Controllers.Application
 

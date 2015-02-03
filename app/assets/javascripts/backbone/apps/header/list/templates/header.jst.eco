@@ -14,17 +14,8 @@
 		    	</li>
 			</ul>
 			<section class="top-bar-section">
-		    <ul class="right">
-					<% for item in @items: %>
-						<li>
-							<a href="<%= item.url %>">
-								<i class="<%= item.icon %>"></i> 
-								<%= item.name %>
-							</a>
-						</li>
-					<% end %>
-				</ul>
-		  	</section>
+		    <ul id="nav-links" class="right"></ul>
+		  </section>
 		</nav>
 	</div>
 </header>

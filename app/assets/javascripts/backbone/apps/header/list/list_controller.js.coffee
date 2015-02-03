@@ -3,7 +3,10 @@
 	class List.Controller extends App.Controllers.Application
 
 		initialize: (options) ->
-			navs = App.request "nav:entities"
+			# normally we would put navs = App.request "nav:entities" here
+			# but we are moving it one level up to be able to service 
+			# click events to header_app 
+			{ navs } = options   
 			listView = @getListView navs
 			@show listView
 

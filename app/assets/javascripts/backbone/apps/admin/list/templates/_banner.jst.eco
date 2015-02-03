@@ -1,0 +1,24 @@
+<div id="banner">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>Admin</h1>
+      <h4>Welcome to Stampytown. Population: five.</h4>
+      <div id="page-icons">
+        <i class="fa fa-cog"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="breadcrumbs">
+  <div class="row">
+    <div class="columns large-12">
+      <ul class="right">
+        <li class="left">
+          <a href="#">
+            Admin
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

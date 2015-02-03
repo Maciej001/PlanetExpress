@@ -1,4 +1,4 @@
-@PlanetExpress.module "Deliveries.List", (List, App, Backbone, Marionette, $, _) ->
+@PlanetExpress.module "DeliveriesApp.List", (List, App, Backbone, Marionette, $, _) ->
 
 	class List.LayoutView extends App.Views.LayoutView
 		template: "deliveries/list/list_layout"

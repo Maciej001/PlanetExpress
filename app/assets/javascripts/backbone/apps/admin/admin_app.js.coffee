@@ -4,12 +4,14 @@
 		appRoutes:
 			"admin": "list"
 
-	API = 
-
+	API =
 		list: ->
+			# after routing to list, we will trigger app event nav:choose
+			# vent/commands handler should never be put in controllers or views
+			App.vent.trigger "nav:choose", "Admin"
 			new AdminApp.List.Controller
 
-	App.addInitializer ->
+	App.addInitializer -> 
 		new AdminApp.Router
 			controller: API 
 

@@ -2,10 +2,11 @@
 
 	class DashboardApp.Router extends Marionette.AppRouter
 		appRoutes:
-			"dashboards/:id": "show"
+			"dashboard": "show"
 
 	API = 
 		show: ->
+			App.vent.trigger "nav:choose", "Dashboard"
 			new DashboardApp.Show.Controller
 
 	App.addInitializer ->

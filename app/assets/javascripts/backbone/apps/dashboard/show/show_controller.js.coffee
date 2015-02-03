@@ -1,4 +1,4 @@
-@PlanetExpress.module "Dashboard.Show", (Show, App, Backbone, Marionette, $, _) ->
+@PlanetExpress.module "DashboardApp.Show", (Show, App, Backbone, Marionette, $, _) ->
 	
 	class Show.Controller extends App.Controllers.Application
 

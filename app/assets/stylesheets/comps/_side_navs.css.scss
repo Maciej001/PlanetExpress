@@ -1,0 +1,11 @@
+#nav-links            {  margin-right: 0.9375em;  }
+.side-nav             {  background-color: $sidenav-bg; @include box-shadow(#DDD 1px 1px 2px); padding: 0;
+    &>li              {  margin-bottom: 0; border-bottom: 1px solid #F5F5F5;
+        &>a           {  padding: 12px 12px; color: #4d4d4d; border-bottom: 1px solid #c5c5c5; text-shadow: 0 1px 0 #F5F5F5;
+            &:hover   {  background-color: #d9d9d9; }
+        }
+        &.active>a    {  background-color: #d9d9d9; border-left: 2px solid $primary-color; }
+        span          {  font-variant: small-caps;  }
+        i.fa          {  text-shadow: 0 1px 0 #FFFFFF; color: #666;  }
+    }
+}

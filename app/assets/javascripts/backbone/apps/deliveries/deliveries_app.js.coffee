@@ -1,15 +1,15 @@
-@PlanetExpress.module "Deliveries", (Deliveries, App, Backbone, Marionette, $, _) ->
+@PlanetExpress.module "DeliveriesApp", (DeliveriesApp, App, Backbone, Marionette, $, _) ->
 
-	class Deliveries.Router extends Marionette.AppRouter
+	class DeliveriesApp.Router extends Marionette.AppRouter
 		appRoutes:
 			"deliveries": "list"
 
 	API = 
-
 		list: ->
-			new Deliveries.List.Controller
+			App.vent.trigger "nav:choose", "Deliveries"
+			new DeliveriesApp.List.Controller
 
 	App.addInitializer ->
-		new Deliveries.Router
+		new DeliveriesApp.Router
 			controller: API 
 
